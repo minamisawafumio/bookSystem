@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>DEMO</title>
+        <link th:href="@{/css/main.css}" rel="stylesheet">
+    </head>
+    <body>
+        <div>
+            <h1>TOP Page</h1>
+            <h1>ボタンクリックで遷移する</h1>
+        </div>
+
+        <div>
+            <p>CASE 1</p>
+            <form name="form1" th:action="@{/nextpage}" method="get">
+                <button type="submit">遷移先をformタグに記載する</button><br>
+            </form>
+
+            <p>CASE 2</p>
+            <button onclick="location.href='/nextpage'">遷移先をonClickに記載する</button><br>
+
+            <p>CASE 3</p>
+            <form name="form3" th:action="@{/nextpage}" method="get">
+                <button type="button" onclick="callCase3()">遷移先をformタグに記載し、javascriptメソッドで遷移する</button><br>
+            </form>
+
+            <p>CASE 4</p>
+            <form name="form4">
+                <button type="button" onclick="callCase4()">javascriptメソッドで遷移先を指定して遷移する</button><br>
+            </form>
+
+            <p>CASE 5</p>
+             <form name="form5" th:action="@{/nextpage(id=${id})}" method="get">
+                <button type="button" onclick="callCase5()">コントローラからの戻り値を遷移先に含める</button><br>
+            </form>
+        </div>
+
+        <script>
+            function callCase3(item) {
+                document.form3.submit();
+            }
+
+            function callCase4(item) {
+                document.form4.action = '/nextpage';
+                document.form4.method = 'get';
+                document.form4.submit();
+            }
+
+            function callCase5(item) {
+                document.form5.submit();
+            }
+        </script>
+    </body>
+</html>

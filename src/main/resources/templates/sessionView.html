@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>セッションのデモ</title>
+</head>
+<body>
+  <h1>セッションのデモ（sessionView）</h1>
+  <p th:text="${sessionMessage}">ここにセッションのメッセージが表示されます</p><br>
+  <p th:text="${aaaabbbb}">ここにセッションのメッセージ(aaaabbbb)が表示されます</p><br>
+  <a href="/session/set">セッションにメッセージを設定する</a>
+  
+  <div th:if="${name} != null" >
+    <span th:text="'こんにちは、' + ${name} + 'さん！'"></span>
+  </div>
+  
+  <table border="1">
+    <tr>
+      <th>名前</th>
+      <th>年齢</th>
+    </tr>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.name}"></td>
+      <td th:text="${user.age}"></td>
+    </tr>
+  </table>
+  
+  
+  <p>CASE 0001</p>
+  <form name="form0001">
+	<button type="button" onclick="nextpage0001()">nextpage</button><br>
+	<button type="button" onclick="nextpage0002()">set</button><br>
+	
+	
+	
+	
+	<p>
+	  <input type="text" name="name" th:value="*{name}" placeholder="氏名" />
+	</p>
+	<p>
+	  <input type="text" name="age" th:value="*{age}" placeholder="年齢" />
+	</p>
+	<button type="button" onclick="btn_user_0001()">送信</button><br>
+	
+	
+  </form>
+  
+
+
+
+  
+  
+  <script>
+	function nextpage0001(item) {
+		document.form0001.action = '/nextpage';
+		document.form0001.method = 'get';
+		document.form0001.submit();
+	}
+
+	function nextpage0002(item) {
+		document.form0001.action = '/session/set2';
+		document.form0001.method = 'get';
+		document.form0001.submit();
+	}
+	
+	function btn_user_0001(item) {
+		document.form0001.action = '/session/btn_user_0001';
+		document.form0001.method = 'post';
+		document.form0001.submit();
+	}
+	
+  </script>
+</body>
+</html>
